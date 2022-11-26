@@ -1,0 +1,14 @@
+﻿@page "/fetchdata"
+
+<PageTitle>Weather forecast</PageTitle>
+
+@using BlazorApp2.Data
+@inject SingletonServise singleton1
+
+@{
+    if (singleton1.GetUser().Count == 0)
+    {
+        singleton1.SetUser(MongoDb.FindAllPersons());
+    }
+}
+<Users Persons="singleton1.GetUser()"></Users>

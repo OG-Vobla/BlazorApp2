@@ -1,0 +1,43 @@
+﻿
+<PageTitle>Weather forecast</PageTitle>
+
+@using BlazorApp2.Data
+@inject SingletonServise singleton
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+@if (Persons == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Class</th>
+                <th>Lvl</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in Persons)
+            {
+                <tr>
+                    <td>@forecast.Name</td>
+                    <td>@forecast.GetType().Name</td>
+                    <td>@forecast.LVL</td>
+                    <td><button @onclick="() => Persons.Remove(forecast)">Delete</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    [Parameter]
+    public List<Person> Persons { get; set; }
+
+}
